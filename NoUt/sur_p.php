@@ -8,7 +8,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>ESSARE - Modificar Usuario</title>
+        <title>ESSARE - Modificacion Productos</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -60,9 +60,9 @@
 
                             <!-- Top nav left menu -->
                             <ul class="nav navbar-nav hidden-sm hidden-xs top-navbar-items">
-                                <li><a href="#">Acerca De</a></li>
-                                <li><a href="#">Ayuda</a></li>
-                                <li><a href="#">Contacto</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
 
                             <!-- Top nav Right menu -->
@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="user-info">
                                     <a href="profile.php">Sergio Pérez</a>
-                                    <p class="text-muted m-0">Administrador</p>
+                                    <p class="text-muted m-0">Administrator</p>
                                 </div>
                             </div>
                             <!--- End User Detail box -->
@@ -127,7 +127,7 @@
 
                                 <li><a href="busqueda.php"><i class="fa fa-search" aria-hidden="true"></i> Realizar Busqueda </a></li>
 
-                                <li><a href="page404.php"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
+                                <li><a href="ui-elements.php"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
 
                                 <li><a href="reportes.php"><i class="fa fa-file-o" aria-hidden="true"></i> Reportes </a></li>
                                 <li>
@@ -164,73 +164,34 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="m-b-20 header-title">Modificar Usuario</h4>
+                                <h4 class="m-b-20 header-title">Surtir Producto</h4>
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form class="form-horizontal" method="POST" action="mod_u.php" role="form">
+                                        <form class="form-horizontal" role="form" method="post">
                                             <br><br>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Ingrese Clave:</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" name="clave" class="form-control" placeholder="Clave de Usuario">
+                                                    <input type="text" class="form-control" placeholder="Clave">
                                                 </div>
                                             </div>
-                                            <br><br><br>
+                                            <div class="form-group">
+                                            <label class="col-md-2 control-label">Agregar:</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="Unidades">
+                                            </div>
+                                            </div>
                                             <div class="form-group">
                                               <center>
-                                                <input type="submit" class="btn btn-primary" name="btn_buscar" value="Buscar usuario"></input>
+                                                <br>
+                                                <btton type="submit" class="btn btn-primary" name="btn_buscar">Surtir Producto</button>
                                               </center>
                                             </div>
-
-                                            <br><br>
-                                            <?php
-                                              if(isset($_POST["clave"])){
-
-                                                    $servername = "localhost";
-                                                    $username = "root";
-                                                    $password = "14sgpp997";
-                                                    $dbname = "lindavista";
-                                                    $conn = new mysqli($servername, $username, $password, $dbname);
-
-                                                    if ($conn->connect_error) {
-                                                        die("Connection failed: " . $conn->connect_error);
-                                                    }else{
-
-                                                            $consulta = "Select Clave, Nombre, ApellidoPaterno, ApellidoMaterno, Edad, Finicio, Tipo, Biografia, Username FROM usuarios where Clave = '".$_POST["clave"]."'";
-                                                            //echo $consulta;
-                                                            $resultado = $conn->query($consulta);
-                                                            if ($resultado->num_rows>0) {
-                                                                
-
-
-                                                                $Array = array();
-                                                                while($row = $resultado->fetch_assoc()) {
-                                                                     $Array[] = $row;
-                                                                 }
-
-                                                            $cadena="mod_u_g.php?clave='".array_values($Array[0])[0]."'&nombre='".array_values($Array[0])[1]."'&apaterno='".array_values($Array[0])[2]."'&amaterno='".array_values($Array[0])[3]."'&edad='".array_values($Array[0])[4]."'&fecha='".array_values($Array[0])[5]."'&tipo='".array_values($Array[0])[6]."'&biografia='".array_values($Array[0])[7]."'&username='".array_values($Array[0])[8]."'";
-                                                                  //echo $cadena;
-                                                                  echo "<script>window.open(\"".$cadena."\",'_self');</script>";
-
-                                                            }else{
-                                                                echo "<div class='alert alert-danger alert-dismissible fade in' role='alert'>
-                                                                            <button type='button' class='close' data-dismiss='alert'
-                                                                                    aria-label='Close'>
-                                                                                <span aria-hidden='true'>&times;</span>
-                                                                            </button>
-                                                                            <strong>Error!</strong> Usuario no encontrado.
-                                                                        </div>";
-                                                            }
-                                                    }
-                                                $conn->close();
-
-                                                //echo "<script>document.location.href='mod_u_g.php';</script>";
-                                              }
-                                            ?>
-
-                                            </form>
                                             
+
+
+                                        </form>
                                     </div>
 
 
@@ -247,10 +208,10 @@
 
                     <div class="footer">
                         <div class="pull-right hidden-xs">
-                            Project Completed <strong class="text-custom">90%</strong>.
+                            Project Completed <strong class="text-custom">39%</strong>.
                         </div>
                         <div>
-                            <strong>ESSARE</strong> - Copyright &copy; 2017
+                            <strong>Simple Admin</strong> - Copyright &copy; 2017
                         </div>
                     </div> <!-- end footer -->
 

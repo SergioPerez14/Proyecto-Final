@@ -8,13 +8,16 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>ESSARE - Modificar Usuario</title>
+        <title>ESSARE - Perfil</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <link rel="shortcut icon" href="assets/images/icono.ico">
+
+        <!--calendar css-->
+        <link href="assets/plugins/fullcalendar/css/fullcalendar.min.css" rel="stylesheet" />
 
         <!-- Bootstrap core CSS -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -130,6 +133,7 @@
                                 <li><a href="page404.php"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
 
                                 <li><a href="reportes.php"><i class="fa fa-file-o" aria-hidden="true"></i> Reportes </a></li>
+
                                 <li>
                                     <a href="javascript: void(0);" aria-expanded="true"><i class="fa fa-users"></i> Usuarios <span class="fa arrow"></span></a>
                                     <ul class="nav-second-level nav" aria-expanded="true">
@@ -151,7 +155,7 @@
                                     </ul>
                                 </li>
 
-                                </li>
+
                             </ul>
                         </div>
                     </div><!--Scrollbar wrapper-->
@@ -161,87 +165,113 @@
                 <!-- START PAGE CONTENT -->
                 <div id="page-right-content">
 
-                    <div class="container">
+                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="m-b-20 header-title">Modificar Usuario</h4>
+                                <h4 class="header-title m-t-0">Calendario</h4>
+                            </div>
+                        </div> <!-- end row -->
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <form class="form-horizontal" method="POST" action="mod_u.php" role="form">
-                                            <br><br>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label">Ingrese Clave:</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" name="clave" class="form-control" placeholder="Clave de Usuario">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="m-t-10">
+                                    <div class="row m-b-30">
+                                        <div class="col-md-3">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <a href="#" data-toggle="modal" data-target="#add-category" class="m-t-10 btn btn-lg btn-primary btn-block waves-effect m-t-20 waves-light">
+                                                        <i class="fa fa-plus"></i> Crear Nuevo Evento
+                                                    </a>
+                                                    <div id="external-events" class="m-t-20">
+                                                        <br>
+                                                        <p class="text-muted">Seleccione y coloque el evento o de click en el calendario</p>
+                                                        <div class="external-event bg-success" data-class="bg-success">
+                                                            <i class="mdi mdi-checkbox-blank-circle m-r-10 vertical-middle"></i>New Theme Release
+                                                        </div>
+                                                        <div class="external-event bg-info" data-class="bg-info">
+                                                            <i class="mdi mdi-checkbox-blank-circle m-r-10 vertical-middle"></i>Mi Evento
+                                                        </div>
+                                                        <div class="external-event bg-warning" data-class="bg-warning">
+                                                            <i class="mdi mdi-checkbox-blank-circle m-r-10 vertical-middle"></i>Reunion Administrador
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- checkbox -->
+                                                    <div class="checkbox checkbox-custom m-t-30">
+                                                        <input id="drop-remove" type="checkbox">
+                                                        <label for="drop-remove">
+                                                            Remover despues de colocar
+                                                        </label>
+                                                    </div>
+
                                                 </div>
                                             </div>
-                                            <br><br><br>
-                                            <div class="form-group">
-                                              <center>
-                                                <input type="submit" class="btn btn-primary" name="btn_buscar" value="Buscar usuario"></input>
-                                              </center>
-                                            </div>
-
-                                            <br><br>
-                                            <?php
-                                              if(isset($_POST["clave"])){
-
-                                                    $servername = "localhost";
-                                                    $username = "root";
-                                                    $password = "14sgpp997";
-                                                    $dbname = "lindavista";
-                                                    $conn = new mysqli($servername, $username, $password, $dbname);
-
-                                                    if ($conn->connect_error) {
-                                                        die("Connection failed: " . $conn->connect_error);
-                                                    }else{
-
-                                                            $consulta = "Select Clave, Nombre, ApellidoPaterno, ApellidoMaterno, Edad, Finicio, Tipo, Biografia, Username FROM usuarios where Clave = '".$_POST["clave"]."'";
-                                                            //echo $consulta;
-                                                            $resultado = $conn->query($consulta);
-                                                            if ($resultado->num_rows>0) {
-                                                                
-
-
-                                                                $Array = array();
-                                                                while($row = $resultado->fetch_assoc()) {
-                                                                     $Array[] = $row;
-                                                                 }
-
-                                                            $cadena="mod_u_g.php?clave='".array_values($Array[0])[0]."'&nombre='".array_values($Array[0])[1]."'&apaterno='".array_values($Array[0])[2]."'&amaterno='".array_values($Array[0])[3]."'&edad='".array_values($Array[0])[4]."'&fecha='".array_values($Array[0])[5]."'&tipo='".array_values($Array[0])[6]."'&biografia='".array_values($Array[0])[7]."'&username='".array_values($Array[0])[8]."'";
-                                                                  //echo $cadena;
-                                                                  echo "<script>window.open(\"".$cadena."\",'_self');</script>";
-
-                                                            }else{
-                                                                echo "<div class='alert alert-danger alert-dismissible fade in' role='alert'>
-                                                                            <button type='button' class='close' data-dismiss='alert'
-                                                                                    aria-label='Close'>
-                                                                                <span aria-hidden='true'>&times;</span>
-                                                                            </button>
-                                                                            <strong>Error!</strong> Usuario no encontrado.
-                                                                        </div>";
-                                                            }
-                                                    }
-                                                $conn->close();
-
-                                                //echo "<script>document.location.href='mod_u_g.php';</script>";
-                                              }
-                                            ?>
-
-                                            </form>
-                                            
-                                    </div>
-
-
-
-
+                                        </div> <!-- end col-->
+                                        <div class="col-md-9">
+                                            <div id="calendar"></div>
+                                        </div> <!-- end col -->
+                                    </div>  <!-- end row -->
                                 </div>
-                                <!-- end row -->
 
+                                <!-- BEGIN MODAL -->
+                                <div class="modal fade none-border" id="event-modal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title">Añadir Nuevo Evento</h4>
+                                            </div>
+                                            <div class="modal-body p-20"></div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Crear evento</button>
+                                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Borrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            </div> <!-- end col -->
+                                <!-- Modal Add Category -->
+                                <div class="modal fade none-border" id="add-category">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title">Añadir una categoria</h4>
+                                            </div>
+                                            <div class="modal-body p-20">
+                                                <form role="form">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="control-label">Nombre categoria</label>
+                                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name"/>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="control-label">Elije el color de la categoria</label>
+                                                            <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
+                                                                <option value="success">Success</option>
+                                                                <option value="danger">Danger</option>
+                                                                <option value="info">Info</option>
+                                                                <option value="primary">Primary</option>
+                                                                <option value="warning">Warning</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END MODAL -->
+                            </div>
+                            <!-- end col-12 -->
                         </div> <!-- end row -->
+
                     </div>
                     <!-- end container -->
 
@@ -269,6 +299,15 @@
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/metisMenu.min.js"></script>
         <script src="assets/js/jquery.slimscroll.min.js"></script>
+
+        <!-- Jquery-Ui -->
+        <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+        <!-- BEGIN PAGE SCRIPTS -->
+        <script src="assets/plugins/moment/moment.js"></script>
+        <script src='assets/plugins/fullcalendar/js/fullcalendar.min.js'></script>
+        <script src="assets/pages/jquery.fullcalendar.js"></script>
+
 
         <!-- App Js -->
         <script src="assets/js/jquery.app.js"></script>

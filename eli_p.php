@@ -1,8 +1,14 @@
+<?php
+  session_start();
+  if($_SESSION["login"]!=1)
+    header("Location: index.php");
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>ESSARE - Eliminar Usuarios</title>
+        <title>ESSARE - Eliminar Productos</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -32,7 +38,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="">
-                        <a href="dash.html" class="logo">
+                        <a href="dash.php" class="logo">
                             <img src="assets/images/ESSARE.jpg" alt="logo" class="logo-lg" />
                             <img src="assets/images/logo_sm.png" alt="logo" class="logo-sm hidden" />
                         </a>
@@ -54,9 +60,9 @@
 
                             <!-- Top nav left menu -->
                             <ul class="nav navbar-nav hidden-sm hidden-xs top-navbar-items">
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Acerca De</a></li>
+                                <li><a href="#">Ayuda</a></li>
+                                <li><a href="#">Contacto</a></li>
                             </ul>
 
                             <!-- Top nav Right menu -->
@@ -71,11 +77,18 @@
                                 <li class="dropdown top-menu-item-xs">
                                     <a href="" class="dropdown-toggle menu-right-item profile" data-toggle="dropdown" aria-expanded="true"><img src="assets/images/users/avatar-2.jpg" alt="user-img" class="img-circle"> </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="profile.html"><i class="ti-user m-r-10"></i> Profile</a></li>
-                                        <li><a href="javascript:void(0)"><i class="ti-settings m-r-10"></i> Settings</a></li>
-                                        <li><a href="javascript:void(0)"><i class="ti-lock m-r-10"></i> Lock screen</a></li>
+                                        <li><a href="profile.php"><i class="ti-user m-r-10"></i> Perfil</a></li>
+                                        <li><a href="timeline.php"><i class="mdi mdi-timelapse"></i> Timeline</a></li>
+                                        <li><a href="calendar.php"><i class="mdi mdi-calendar"></i> Calendar</a></li>
+                                        <li><a href="contacts.php"><i class="mdi mdi-account-multiple"></i> Contacts</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="index.html"><i class="ti-power-off m-r-10"></i> Logout</a></li>
+                                        <script type="text/javascript">
+                                          function logout() {
+                                              $.get("logout.php");
+                                              return false;
+                                            }
+                                        </script>
+                                        <li><a href="index.php"  onclick="logout()"><i class="ti-power-off m-r-10"></i>Salir</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -102,25 +115,25 @@
                                     <img src="assets/images/users/avatar-2.jpg" alt="" class="thumb-md img-circle">
                                 </div>
                                 <div class="user-info">
-                                    <a href="#">Sergio Pérez</a>
-                                    <p class="text-muted m-0">Administrator</p>
+                                    <a href="profile.php">Sergio Pérez</a>
+                                    <p class="text-muted m-0">Administrador</p>
                                 </div>
                             </div>
                             <!--- End User Detail box -->
 
                             <!-- Left Menu Start -->
                             <ul class="metisMenu nav" id="side-menu">
-                                <li><a href="dash.html"><i class="ti-home"></i> Dashboard </a></li>
+                                <li><a href="dash.php"><i class="ti-home"></i> Dashboard </a></li>
 
-                                <li><a href="busqueda.html"><i class="fa fa-search" aria-hidden="true"></i> Realizar Busqueda </a></li>
+                                <li><a href="busqueda.php"><i class="fa fa-search" aria-hidden="true"></i> Realizar Busqueda </a></li>
 
-                                <li><a href="ui-elements.html"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
+                                <li><a href="page404.php"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
 
-                                <li><a href="reportes.html"><i class="fa fa-file-o" aria-hidden="true"></i> Reportes </a></li>
+                                <li><a href="reportes.php"><i class="fa fa-file-o" aria-hidden="true"></i> Reportes </a></li>
                                 <li>
                                     <a href="javascript: void(0);" aria-expanded="true"><i class="fa fa-users"></i> Usuarios <span class="fa arrow"></span></a>
                                     <ul class="nav-second-level nav" aria-expanded="true">
-                                        <li><a href="alta_u.html">Alta de Usuario</a></li>
+                                        <li><a href="alta_u.php">Alta de Usuario</a></li>
                                         <li><a href="mod_u.php">Modificar Usuario</a></li>
                                         <li><a href="eli_u.php">Eliminar Usuario</a></li>
                                         </li>
@@ -130,10 +143,10 @@
                                 <li>
                                     <a href="javascript: void(0);" aria-expanded="true"><i class="fa fa-database"></i> Inventario <span class="fa arrow"></span></a>
                                     <ul class="nav-second-level nav" aria-expanded="true">
-                                        <li><a href="alta_p.html">Alta de Producto</a></li>
-                                        <li><a href="mod_p.html">Modificar Producto</a></li>
-                                        <li><a href="eli_p.html">Eliminar Producto</a></li>
-                                        <li><a href="sur_p.html">Surtir Producto</a></li>
+                                        <li><a href="alta_p.php">Alta de Producto</a></li>
+                                        <li><a href="mod_p.php">Modificar Producto</a></li>
+                                        <li><a href="eli_p.php">Eliminar Producto</a></li>
+                                        <li><a href="sur_p.php">Surtir Producto</a></li>
                                         </li>
                                     </ul>
                                 </li>
@@ -151,7 +164,8 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="m-b-20 header-title">Eliminar Usuario</h4>
+                                <h4 class="m-b-20 header-title">Eliminar Productos</h4>
+
 
                                 <div class="row">
                                     <div class="col-md-12">
@@ -160,19 +174,57 @@
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Ingrese Clave:</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" placeholder="Clave">
+                                                    <input type="text" name="codigo" class="form-control" placeholder="Clave del producto">
                                                 </div>
                                             </div>
                                             <br><br>
                                             <?php
-                                              if(isset($_POST["btn_buscar"])){
-                                                echo "<script>document.location.href='eli_p_g.php';</script>";
+                                              if(isset($_POST["codigo"])){
+
+                                                    $servername = "localhost";
+                                                    $username = "root";
+                                                    $password = "14sgpp997";
+                                                    $dbname = "lindavista";
+                                                    $conn = new mysqli($servername, $username, $password, $dbname);
+
+                                                    if ($conn->connect_error) {
+                                                        die("Connection failed: " . $conn->connect_error);
+                                                    }else{
+
+                                                            $consulta = "SELECT Codigo,Nombre, Marca, Tipo, Talla FROM productos where Codigo = '".$_POST["codigo"]."'";
+                                                            //echo $consulta;
+                                                            $resultado = $conn->query($consulta);
+                                                            if ($resultado->num_rows>0) {
+                                                                
+
+
+                                                                $Array = array();
+                                                                while($row = $resultado->fetch_assoc()) {
+                                                                     $Array[] = $row;
+                                                                 }
+
+                                                            $cadena="eli_p_g.php?clave='".array_values($Array[0])[0]."'&nombre='".array_values($Array[0])[1]."'&marca='".array_values($Array[0])[2]."'&tipo='".array_values($Array[0])[3]."'&talla='".array_values($Array[0])[4]."'";
+                                                                  //echo $cadena;
+                                                                  echo "<script>window.open(\"".$cadena."\",'_self');</script>";
+
+                                                            }else{
+                                                                echo "<div class='alert alert-danger alert-dismissible fade in' role='alert'>
+                                                                            <button type='button' class='close' data-dismiss='alert'
+                                                                                    aria-label='Close'>
+                                                                                <span aria-hidden='true'>&times;</span>
+                                                                            </button>
+                                                                            <strong>Error!</strong> Producto no encontrado.
+                                                                        </div>";
+                                                            }
+                                                    }
+                                                $conn->close();
+
+                                                //echo "<script>document.location.href='mod_u_g.php';</script>";
                                               }
                                             ?>
-                                            <div class="form-group">
+                                             <div class="form-group">
                                               <center>
-                                                <br><br>
-                                                <input type="submit" class="btn btn-dark btn-bordered" name="btn_buscar" value="Buscar usuario"></input>
+                                                <input type="submit" class="btn btn-primary" name="btn_buscar" value="Buscar producto"></input>
                                               </center>
                                             </div>
                                             
@@ -183,6 +235,7 @@
                                 <!-- end row -->
 
 
+
                             </div> <!-- end col -->
                         </div> <!-- end row -->
                     </div>
@@ -190,10 +243,10 @@
 
                     <div class="footer">
                         <div class="pull-right hidden-xs">
-                            Project Completed <strong class="text-custom">39%</strong>.
+                            Project Completed <strong class="text-custom">90%</strong>.
                         </div>
                         <div>
-                            <strong>Simple Admin</strong> - Copyright &copy; 2017
+                            <strong>ESSARE</strong> - Copyright &copy; 2017
                         </div>
                     </div> <!-- end footer -->
 

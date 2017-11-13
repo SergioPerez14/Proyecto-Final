@@ -3,12 +3,12 @@
   if($_SESSION["login"]!=1)
     header("Location: index.php");
  ?>
-
+ 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>ESSARE - Modificar Usuario</title>
+        <title>ESSARE - Alta Usuarios</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -60,9 +60,9 @@
 
                             <!-- Top nav left menu -->
                             <ul class="nav navbar-nav hidden-sm hidden-xs top-navbar-items">
-                                <li><a href="#">Acerca De</a></li>
-                                <li><a href="#">Ayuda</a></li>
-                                <li><a href="#">Contacto</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
 
                             <!-- Top nav Right menu -->
@@ -77,7 +77,7 @@
                                 <li class="dropdown top-menu-item-xs">
                                     <a href="" class="dropdown-toggle menu-right-item profile" data-toggle="dropdown" aria-expanded="true"><img src="assets/images/users/avatar-2.jpg" alt="user-img" class="img-circle"> </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="profile.php"><i class="ti-user m-r-10"></i> Perfil</a></li>
+                                        <li><a href="profile.php"><i class="ti-user m-r-10"></i> Profile</a></li>
                                         <li><a href="timeline.php"><i class="mdi mdi-timelapse"></i> Timeline</a></li>
                                         <li><a href="calendar.php"><i class="mdi mdi-calendar"></i> Calendar</a></li>
                                         <li><a href="contacts.php"><i class="mdi mdi-account-multiple"></i> Contacts</a></li>
@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="user-info">
                                     <a href="profile.php">Sergio Pérez</a>
-                                    <p class="text-muted m-0">Administrador</p>
+                                    <p class="text-muted m-0">Administrator</p>
                                 </div>
                             </div>
                             <!--- End User Detail box -->
@@ -127,7 +127,7 @@
 
                                 <li><a href="busqueda.php"><i class="fa fa-search" aria-hidden="true"></i> Realizar Busqueda </a></li>
 
-                                <li><a href="page404.php"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
+                                <li><a href="ui-elements.php"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
 
                                 <li><a href="reportes.php"><i class="fa fa-file-o" aria-hidden="true"></i> Reportes </a></li>
                                 <li>
@@ -164,150 +164,149 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="m-b-20 header-title">Datos del Usuario</h4>
+                                <h4 class="m-b-20 header-title">Alta de Usuarios</h4>
 
-                                                <?php
-                                                    if(isset($_GET["clave"])){
-                                                        $clave = $_GET["clave"];
-                                                        $nombre = $_GET["nombre"];
-                                                        $apaterno = $_GET["apaterno"];
-                                                        $amaterno = $_GET["amaterno"];
-                                                        $edad = $_GET["edad"];
-                                                        $fecha = $_GET["fecha"];
-                                                        $tipo = $_GET["tipo"];
-                                                        $biografia = $_GET["biografia"];
-                                                        $username = $_GET["username"];
-                                                        //echo "holaaa".$nombre;
+                                        <?php
+
+                                            $servername = "localhost";
+                                            $username = "root";
+                                            $password = "";
+                                            $dbname = "lindavista";
+                                            $conn = new mysqli($servername, $username, $password, $dbname);
+                                            if ($conn->connect_error) {
+                                                die("Connection failed: " . $conn->connect_error);
+                                            }else{
+                                                if(isset($_POST['registro']))
+                                                 {
+                                                    $clave = $_POST["clave"];
+                                                    $nombre = $_POST["nombre"];
+                                                    $apaterno = $_POST["apaterno"];
+                                                    $amaterno = $_POST["amaterno"];
+                                                    $edad = $_POST["edad"];
+                                                    $fecha = $_POST["fecha"];
+                                                    $tipo = $_POST["tipo"];
+                                                    $biografia = $_POST["biografia"];
+                                                    $username = $_POST["usuario"];
+                                                    $pass = $_POST["psw"];
+
+                                                    $date = new DateTime($fecha);
+                                                    $date = date_format($date,"Y-m-d");
+                                                    $consulta = 'INSERT INTO usuarios (Clave, Nombre, ApellidoPaterno, ApellidoMaterno, Edad, Finicio, Tipo, Biografia, Username, Password) VALUES ("'.$clave.'","'.$nombre.'","'.$apaterno.'","'.$amaterno.'",'.$edad.',"'.$date.'","'.$tipo.'","'.$biografia.'","'.$username.'","'.$pass.'")';
+                                                    echo $consulta;
+                                                    $resultado = $conn->query($consulta);
+                                                   if ($resultado==true)
+                                                    {
+                                                      echo "<div class='alert alert-success alert-dismissible fade in' role='alert'>
+                                                                        <button type='button' class='close' data-dismiss='alert'
+                                                                            aria-label='Close'>
+                                                                            <span aria-hidden='true'>&times;</span>
+                                                                        </button>
+                                                                         Empleado <strong>Registrado</strong> Satisfactoriamente.
+                                                                    </div>";
+                                                    }else{
+                                                     echo "<div class='alert alert-success alert-dismissible fade in' role='alert'>
+                                                                        <button type='button' class='close' data-dismiss='alert'
+                                                                            aria-label='Close'>
+                                                                            <span aria-hidden='true'>&times;</span>
+                                                                        </button>
+                                                                         Algo ha sucedido <strong>mal</strong>. Favor de llamar al administrador.
+                                                                    </div>";
                                                     }
+                                                  }
+                                              }
 
-                                                    if(isset($_POST["nombre"])){
-
-                                                        $servername = "localhost";
-                                                        $username = "root";
-                                                        $password = "14sgpp997";
-                                                        $dbname = "lindavista";
-                                                        $conn = new mysqli($servername, $username, $password, $dbname);
-
-                                                        if ($conn->connect_error) {
-                                                            die("Connection failed: " . $conn->connect_error);
-                                                        }else{
-                                                                $clave = $_POST["clave"];
-                                                                $nombre = $_POST["nombre"];
-                                                                $apaterno = $_POST["apaterno"];
-                                                                $amaterno = $_POST["amaterno"];
-                                                                $edad = $_POST["edad"];
-                                                                $fecha = $_POST["fecha"];
-                                                                $tipo = $_POST["tipo"];
-                                                                $biografia = $_POST["biografia"];
-                                                                $username = $_POST["usuario"];
-
-                                                                $date = new DateTime($fecha);
-                                                                $date = date_format($date,"Y-m-d");
-
-                                                                $consulta = "update usuarios set Nombre='".$nombre."', ApellidoPaterno='".$apaterno."', Edad=".$edad.", ApellidoMaterno='".$amaterno."',Finicio='".$fecha."', Tipo='".$tipo."', Biografia=".$biografia.", username= '".$username."' where Clave = '".$clave."'";
-                                                              
-                                                                //echo $consulta;
-                                                                $resultado = $conn->query($consulta);
-                                                               if ($resultado==true)
-                                                                {
-
-                                                                  echo "<div class='alert alert-success alert-dismissible fade in' role='alert'>
-                                                                                    <button type='button' class='close' data-dismiss='alert'
-                                                                                        aria-label='Close'>
-                                                                                        <span aria-hidden='true'>&times;</span>
-                                                                                    </button>
-                                                                                     Usuario modificado correctamente.
-                                                                                </div>";
-                                                                }else{
-
-                                                                            echo "Error deleting record: " . $conn->error;
-                                                                  echo "<div class='alert alert-success alert-dismissible fade in' role='alert'>
-                                                                                    <button type='button' class='close' data-dismiss='alert'
-                                                                                        aria-label='Close'>
-                                                                                        <span aria-hidden='true'>&times;</span>
-                                                                                    </button>
-                                                                                     Algo ha ido mal. Usuario no modificado.
-                                                                                </div>";
-                                                                }
-                                                              
-                                                          }
-
-                                                        $conn->close();
-                                                                }
-                                                            ?>
+                                            
+                                        
+                                        ?>
 
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form class="form-horizontal" role="form" method="post" action="mod_u_g.php">
-                                          <br>
-                                            <div class="form-group" hidden="" >
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Clave:</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" name="clave" class="form-control" placeholder="" value=<?php echo $clave; ?>>
+                                                    <input type="text" name="clave" class="form-control" placeholder="Clave">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Nombre(s):</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" name="nombre" class="form-control" placeholder="" value=<?php echo $nombre; ?>>
+                                                    <input type="text" name="nombre" class="form-control" placeholder="Nombre">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label" for="example-email">Apellido Paterno:</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" name="apaterno" class="form-control" placeholder="" value=<?php echo $apaterno; ?>>
+                                                    <input type="text" name="apaterno" class="form-control" placeholder="Apellido Paterno">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label" for="example-email">Apellido Materno:</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" name="amaterno" class="form-control" placeholder="" value=<?php echo $amaterno; ?>>
+                                                    <input type="text" name="amaterno" class="form-control" placeholder="Apellido Materno">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label" for="example-email">Edad:</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" name="edad" class="form-control" placeholder="" value=<?php echo $edad; ?>>
+                                                    <input type="text" name="edad" class="form-control" placeholder="Edad">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label" for="example-email">Fecha de Inicio:</label>
                                                 <div>
                                                     <div class="col-md-9">
-                                                        <input type="text" name="fecha" class="form-control" placeholder="" id="datepicker-autoclose" value=<?php echo $fecha; ?>>
+                                                        <input type="text" name="fecha" class="form-control" placeholder="" id="datepicker-autoclose">
                                                     </div><!-- input-group -->
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">Tipo de Empleado:</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" name="tipo" class="form-control" placeholder="" value=<?php echo $tipo; ?>>
+                                                <label class="col-sm-2 control-label">Tipo de Empleado:</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" name="tipo">
+                                                        <option>Empleado</option>
+                                                        <option>Administrador</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Biografia</label>
                                                 <div class="col-md-9">
-                                                    <textarea class="form-control" name="biografia" rows="5"><?php echo $biografia; ?></textarea>
+                                                    <textarea class="form-control" name="biografia" rows="5"></textarea>
+                                                    <span class="help-block"><small>Datos importantes de la persona</small></span>
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label" for="example-email">Username:</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" name="usuario" class="form-control" placeholder="" value=<?php echo $username; ?>>
+                                                    <input type="text" name="usuario" class="form-control" placeholder="Username">
+                                                    <span class="help-block"><small>Username sera la clave con la que accedera al sistema</small></span>
                                                 </div>
                                             </div>
-                                            <br>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Password:</label>
+                                                <div class="col-md-9">
+                                                    <input type="password" name="psw" class="form-control" placeholder="Password">
+                                                    <span class="help-block"><small>La contraseña permite autenticar al usuario</small></span>
+                                                </div>
+                                            </div>
+
                                             <div class="form-group">
                                               <center>
-                                                <br><br>
-                                                <button type="cancel" class="btn btn-default"><a href="mod_u.php">Cancelar</a></button>                                                
-                                                <input type="submit" class="btn btn-custom btn-bordered" value="Modificar Usuario">
+                                                <br><br><br>
+                                                <input type="submit" name="registro" class="btn btn-success btn-bordered" value="Guardar Usuario">
                                               </center>
                                             </div>
+                                            
+
 
                                         </form>
                                     </div>
+
+
+
+
                                 </div>
                                 <!-- end row -->
 
@@ -319,10 +318,10 @@
 
                     <div class="footer">
                         <div class="pull-right hidden-xs">
-                            Project Completed <strong class="text-custom">90%</strong>.
+                            Project Completed <strong class="text-custom">39%</strong>.
                         </div>
                         <div>
-                            <strong>ESSARE</strong> - Copyright &copy; 2017
+                            <strong>Simple Admin</strong> - Copyright &copy; 2017
                         </div>
                     </div> <!-- end footer -->
 
@@ -341,6 +340,15 @@
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/metisMenu.min.js"></script>
         <script src="assets/js/jquery.slimscroll.min.js"></script>
+        
+        <script src="assets/plugins/select2/js/select2.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js" type="text/javascript"></script>
+
+
+        <script src="assets/plugins/timepicker/bootstrap-timepicker.js"></script>
+        <script src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+        <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="assets/plugins/clockpicker/js/bootstrap-clockpicker.min.js"></script>
 
         <!-- App Js -->
         <script src="assets/js/jquery.app.js"></script>

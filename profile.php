@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  if($_SESSION["login"]!=1)
+    header("Location: index.php");
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,7 +38,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="">
-                        <a href="dash.html" class="logo">
+                        <a href="dash.php" class="logo">
                             <img src="assets/images/ESSARE.jpg" alt="logo" class="logo-lg" />
                             <img src="assets/images/logo_sm.png" alt="logo" class="logo-sm hidden" />
                         </a>
@@ -54,9 +60,9 @@
 
                             <!-- Top nav left menu -->
                             <ul class="nav navbar-nav hidden-sm hidden-xs top-navbar-items">
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Acerca De</a></li>
+                                <li><a href="#">Ayuda</a></li>
+                                <li><a href="#">Contacto</a></li>
                             </ul>
 
                             <!-- Top nav Right menu -->
@@ -67,121 +73,22 @@
                                          <a href=""><i class="fa fa-search"></i></a>
                                     </form>
                                 </li>
-                                <li class="dropdown top-menu-item-xs">
-                                    <a href="#" data-target="#" class="dropdown-toggle menu-right-item" data-toggle="dropdown" aria-expanded="true">
-                                        <i class="mdi mdi-bell"></i> <span class="label label-danger">3</span>
-                                    </a>
-                                    <ul class="dropdown-menu p-0 dropdown-menu-lg">
-                                        <!--<li class="notifi-title"><span class="label label-default pull-right">New 3</span>Notification</li>-->
-                                        <li class="list-group notification-list" style="height: 267px;">
-                                           <div class="slimscroll">
-                                               <!-- list item-->
-                                               <a href="javascript:void(0);" class="list-group-item">
-                                                  <div class="media">
-                                                     <div class="media-left p-r-10">
-                                                        <em class="fa fa-diamond bg-primary"></em>
-                                                     </div>
-                                                     <div class="media-body">
-                                                        <h5 class="media-heading">A new order has been placed A new order has been placed</h5>
-                                                        <p class="m-0">
-                                                            <small>There are new settings available</small>
-                                                        </p>
-                                                     </div>
-                                                  </div>
-                                               </a>
-
-                                               <!-- list item-->
-                                               <a href="javascript:void(0);" class="list-group-item">
-                                                  <div class="media">
-                                                     <div class="media-left p-r-10">
-                                                        <em class="fa fa-cog bg-warning"></em>
-                                                     </div>
-                                                     <div class="media-body">
-                                                        <h5 class="media-heading">New settings</h5>
-                                                        <p class="m-0">
-                                                            <small>There are new settings available</small>
-                                                        </p>
-                                                     </div>
-                                                  </div>
-                                               </a>
-
-                                               <!-- list item-->
-                                               <a href="javascript:void(0);" class="list-group-item">
-                                                  <div class="media">
-                                                     <div class="media-left p-r-10">
-                                                        <em class="fa fa-bell-o bg-custom"></em>
-                                                     </div>
-                                                     <div class="media-body">
-                                                        <h5 class="media-heading">Updates</h5>
-                                                        <p class="m-0">
-                                                            <small>There are <span class="text-primary font-600">2</span> new updates available</small>
-                                                        </p>
-                                                     </div>
-                                                  </div>
-                                               </a>
-
-                                               <!-- list item-->
-                                               <a href="javascript:void(0);" class="list-group-item">
-                                                  <div class="media">
-                                                     <div class="media-left p-r-10">
-                                                        <em class="fa fa-user-plus bg-danger"></em>
-                                                     </div>
-                                                     <div class="media-body">
-                                                        <h5 class="media-heading">New user registered</h5>
-                                                        <p class="m-0">
-                                                            <small>You have 10 unread messages</small>
-                                                        </p>
-                                                     </div>
-                                                  </div>
-                                               </a>
-
-                                                <!-- list item-->
-                                               <a href="javascript:void(0);" class="list-group-item">
-                                                  <div class="media">
-                                                     <div class="media-left p-r-10">
-                                                        <em class="fa fa-diamond bg-primary"></em>
-                                                     </div>
-                                                     <div class="media-body">
-                                                        <h5 class="media-heading">A new order has been placed A new order has been placed</h5>
-                                                        <p class="m-0">
-                                                            <small>There are new settings available</small>
-                                                        </p>
-                                                     </div>
-                                                  </div>
-                                               </a>
-
-                                               <!-- list item-->
-                                               <a href="javascript:void(0);" class="list-group-item">
-                                                  <div class="media">
-                                                     <div class="media-left p-r-10">
-                                                        <em class="fa fa-cog bg-warning"></em>
-                                                     </div>
-                                                     <div class="media-body">
-                                                        <h5 class="media-heading">New settings</h5>
-                                                        <p class="m-0">
-                                                            <small>There are new settings available</small>
-                                                        </p>
-                                                     </div>
-                                                  </div>
-                                               </a>
-                                           </div>
-                                        </li>
-                                        <!--<li>-->
-                                            <!--<a href="javascript:void(0);" class="list-group-item text-right">-->
-                                                <!--<small class="font-600">See all notifications</small>-->
-                                            <!--</a>-->
-                                        <!--</li>-->
-                                    </ul>
-                                </li>
 
                                 <li class="dropdown top-menu-item-xs">
                                     <a href="" class="dropdown-toggle menu-right-item profile" data-toggle="dropdown" aria-expanded="true"><img src="assets/images/users/avatar-2.jpg" alt="user-img" class="img-circle"> </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="profile.html"><i class="ti-user m-r-10"></i> Profile</a></li>
-                                        <li><a href="javascript:void(0)"><i class="ti-settings m-r-10"></i> Settings</a></li>
-                                        <li><a href="javascript:void(0)"><i class="ti-lock m-r-10"></i> Lock screen</a></li>
+                                        <li><a href="profile.php"><i class="ti-user m-r-10"></i> Perfil</a></li>
+                                        <li><a href="timeline.php"><i class="ti-user m-r-10"></i> Timeline</a></li>
+                                        <li><a href="calendar.php"><i class="ti-user m-r-10"></i> Calendar</a></li>
+                                        <li><a href="contacts.php"><i class="ti-user m-r-10"></i> Contacts</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="index.html"><i class="ti-power-off m-r-10"></i> Logout</a></li>
+                                        <script type="text/javascript">
+                                          function logout() {
+                                              $.get("logout.php");
+                                              return false;
+                                            }
+                                        </script>
+                                        <li><a href="index.php"  onclick="logout()"><i class="ti-power-off m-r-10"></i>Salir</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -208,7 +115,7 @@
                                     <img src="assets/images/users/avatar-2.jpg" alt="" class="thumb-md img-circle">
                                 </div>
                                 <div class="user-info">
-                                    <a href="#">Sergio Pérez</a>
+                                    <a href="profile.php">Sergio Pérez</a>
                                     <p class="text-muted m-0">Administrator</p>
                                 </div>
                             </div>
@@ -216,20 +123,20 @@
 
                             <!-- Left Menu Start -->
                             <ul class="metisMenu nav" id="side-menu">
-                                <li><a href="dash.html"><i class="ti-home"></i> Dashboard </a></li>
+                                <li><a href="dash.php"><i class="ti-home"></i> Dashboard </a></li>
 
-                                <li><a href="busqueda.html"><i class="fa fa-search" aria-hidden="true"></i> Realizar Busqueda </a></li>
+                                <li><a href="busqueda.php"><i class="fa fa-search" aria-hidden="true"></i> Realizar Busqueda </a></li>
 
-                                <li><a href="ui-elements.html"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
+                                <li><a href="page404.php"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
 
-                                <li><a href="reportes.html"><i class="fa fa-file-o" aria-hidden="true"></i> Reportes </a></li>
+                                <li><a href="reportes.php"><i class="fa fa-file-o" aria-hidden="true"></i> Reportes </a></li>
 
                                 <li>
                                     <a href="javascript: void(0);" aria-expanded="true"><i class="fa fa-users"></i> Usuarios <span class="fa arrow"></span></a>
                                     <ul class="nav-second-level nav" aria-expanded="true">
-                                        <li><a href="alta_u.html">Alta de Usuario</a></li>
-                                        <li><a href="mod_u.html">Modificar Usuario</a></li>
-                                        <li><a href="eli_u.html">Eliminar Usuario</a></li>
+                                        <li><a href="alta_u.php">Alta de Usuario</a></li>
+                                        <li><a href="mod_u.php">Modificar Usuario</a></li>
+                                        <li><a href="eli_u.php">Eliminar Usuario</a></li>
                                         </li>
                                     </ul>
                                 </li>
@@ -237,10 +144,10 @@
                                 <li>
                                     <a href="javascript: void(0);" aria-expanded="true"><i class="fa fa-database"></i> Inventario <span class="fa arrow"></span></a>
                                     <ul class="nav-second-level nav" aria-expanded="true">
-                                        <li><a href="alta_p.html">Alta de Producto</a></li>
-                                        <li><a href="mod_p.html">Modificar Producto</a></li>
-                                        <li><a href="eli_p.html">Eliminar Producto</a></li>
-                                        <li><a href="sur_p.html">Surtir Producto</a></li>
+                                        <li><a href="alta_p.php">Alta de Producto</a></li>
+                                        <li><a href="mod_p.php">Modificar Producto</a></li>
+                                        <li><a href="eli_p.php">Eliminar Producto</a></li>
+                                        <li><a href="sur_p.php">Surtir Producto</a></li>
                                         </li>
                                     </ul>
                                 </li>
@@ -302,7 +209,7 @@
                                                     <div class="m-b-20">
                                                         <strong>Nombre</strong>
                                                         <br>
-                                                        <p class="text-muted">Johnathan Deo</p>
+                                                        <p class="text-muted">Sergio G. Perez Picazo</p>
                                                     </div>
                                                     <div class="m-b-20">
                                                         <strong>Telefono</strong>
@@ -312,7 +219,7 @@
                                                     <div class="m-b-20">
                                                         <strong>E-mail</strong>
                                                         <br>
-                                                        <p class="text-muted">johnath@domain.com</p>
+                                                        <p class="text-muted">sergio@domain.com</p>
                                                     </div>
                                                     <div class="about-info-p m-b-0">
                                                         <strong>Localizacion</strong>
@@ -378,10 +285,10 @@
 
                     <div class="footer">
                         <div class="pull-right hidden-xs">
-                            Project Completed <strong class="text-custom">39%</strong>.
+                            Project Completed <strong class="text-custom">90%</strong>.
                         </div>
                         <div>
-                            <strong>Simple Admin</strong> - Copyright &copy; 2017
+                            <strong>ESSARE</strong> - Copyright &copy; 2017
                         </div>
                     </div> <!-- end footer -->
 

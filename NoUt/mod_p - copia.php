@@ -1,14 +1,8 @@
-<?php
-  session_start();
-  if($_SESSION["login"]!=1)
-    header("Location: index.php");
- ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>ESSARE - Modificar Usuario</title>
+        <title>ESSARE - Modificacion Productos</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -60,9 +54,9 @@
 
                             <!-- Top nav left menu -->
                             <ul class="nav navbar-nav hidden-sm hidden-xs top-navbar-items">
-                                <li><a href="#">Acerca De</a></li>
-                                <li><a href="#">Ayuda</a></li>
-                                <li><a href="#">Contacto</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
 
                             <!-- Top nav Right menu -->
@@ -77,18 +71,9 @@
                                 <li class="dropdown top-menu-item-xs">
                                     <a href="" class="dropdown-toggle menu-right-item profile" data-toggle="dropdown" aria-expanded="true"><img src="assets/images/users/avatar-2.jpg" alt="user-img" class="img-circle"> </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="profile.php"><i class="ti-user m-r-10"></i> Perfil</a></li>
-                                        <li><a href="timeline.php"><i class="mdi mdi-timelapse"></i> Timeline</a></li>
-                                        <li><a href="calendar.php"><i class="mdi mdi-calendar"></i> Calendar</a></li>
-                                        <li><a href="contacts.php"><i class="mdi mdi-account-multiple"></i> Contacts</a></li>
+                                        <li><a href="profile.php"><i class="ti-user m-r-10"></i> Profile</a></li>
                                         <li class="divider"></li>
-                                        <script type="text/javascript">
-                                          function logout() {
-                                              $.get("logout.php");
-                                              return false;
-                                            }
-                                        </script>
-                                        <li><a href="index.php"  onclick="logout()"><i class="ti-power-off m-r-10"></i>Salir</a></li>
+                                        <li><a href="index.php"><i class="ti-power-off m-r-10"></i> Logout</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -116,7 +101,7 @@
                                 </div>
                                 <div class="user-info">
                                     <a href="profile.php">Sergio Pérez</a>
-                                    <p class="text-muted m-0">Administrador</p>
+                                    <p class="text-muted m-0">Administrator</p>
                                 </div>
                             </div>
                             <!--- End User Detail box -->
@@ -127,7 +112,7 @@
 
                                 <li><a href="busqueda.php"><i class="fa fa-search" aria-hidden="true"></i> Realizar Busqueda </a></li>
 
-                                <li><a href="page404.php"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
+                                <li><a href="ui-elements.php"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
 
                                 <li><a href="reportes.php"><i class="fa fa-file-o" aria-hidden="true"></i> Reportes </a></li>
                                 <li>
@@ -164,78 +149,57 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="m-b-20 header-title">Modificar Usuario</h4>
+                                <h4 class="m-b-20 header-title">Datos del Producto</h4>
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form class="form-horizontal" method="POST" action="mod_u.php" role="form">
-                                            <br><br>
+                                        <form class="form-horizontal" role="form">
+                                          <br>
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label">Ingrese Clave:</label>
+                                                <label class="col-md-2 control-label">Nombre Producto:</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" name="clave" class="form-control" placeholder="Clave de Usuario">
+                                                    <input type="text" class="form-control" placeholder="Nombre Producto">
                                                 </div>
                                             </div>
-                                            <br><br><br>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label" for="example-email">Marca:</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" placeholder="Marca">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label" for="example-email">Tipo:</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" placeholder="Tipo">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Tallas:</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control">
+                                                        <option>22</option>
+                                                        <option>23</option>
+                                                        <option>24</option>
+                                                        <option>25</option>
+                                                        <option>26</option>
+                                                        <option>27</option>
+                                                        <option>28</option>
+                                                        <option>29</option>
+                                                        <option>30</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
                                             <div class="form-group">
                                               <center>
-                                                <input type="submit" class="btn btn-primary" name="btn_buscar" value="Buscar usuario"></input>
+                                                <br><br>
+                                                <button type="cancel" class="btn btn-dark btn-bordered">Cancelar modificacion</button>
+                                                <button type="submit" class="btn btn-custom btn-bordered">Guardar modificacion</button>
                                               </center>
                                             </div>
 
-                                            <br><br>
-                                            <?php
-                                              if(isset($_POST["clave"])){
-
-                                                    $servername = "localhost";
-                                                    $username = "root";
-                                                    $password = "14sgpp997";
-                                                    $dbname = "lindavista";
-                                                    $conn = new mysqli($servername, $username, $password, $dbname);
-
-                                                    if ($conn->connect_error) {
-                                                        die("Connection failed: " . $conn->connect_error);
-                                                    }else{
-
-                                                            $consulta = "Select Clave, Nombre, ApellidoPaterno, ApellidoMaterno, Edad, Finicio, Tipo, Biografia, Username FROM usuarios where Clave = '".$_POST["clave"]."'";
-                                                            //echo $consulta;
-                                                            $resultado = $conn->query($consulta);
-                                                            if ($resultado->num_rows>0) {
-                                                                
-
-
-                                                                $Array = array();
-                                                                while($row = $resultado->fetch_assoc()) {
-                                                                     $Array[] = $row;
-                                                                 }
-
-                                                            $cadena="mod_u_g.php?clave='".array_values($Array[0])[0]."'&nombre='".array_values($Array[0])[1]."'&apaterno='".array_values($Array[0])[2]."'&amaterno='".array_values($Array[0])[3]."'&edad='".array_values($Array[0])[4]."'&fecha='".array_values($Array[0])[5]."'&tipo='".array_values($Array[0])[6]."'&biografia='".array_values($Array[0])[7]."'&username='".array_values($Array[0])[8]."'";
-                                                                  //echo $cadena;
-                                                                  echo "<script>window.open(\"".$cadena."\",'_self');</script>";
-
-                                                            }else{
-                                                                echo "<div class='alert alert-danger alert-dismissible fade in' role='alert'>
-                                                                            <button type='button' class='close' data-dismiss='alert'
-                                                                                    aria-label='Close'>
-                                                                                <span aria-hidden='true'>&times;</span>
-                                                                            </button>
-                                                                            <strong>Error!</strong> Usuario no encontrado.
-                                                                        </div>";
-                                                            }
-                                                    }
-                                                $conn->close();
-
-                                                //echo "<script>document.location.href='mod_u_g.php';</script>";
-                                              }
-                                            ?>
-
-                                            </form>
-                                            
+                                        </form>
                                     </div>
-
-
-
-
                                 </div>
                                 <!-- end row -->
 
@@ -247,10 +211,10 @@
 
                     <div class="footer">
                         <div class="pull-right hidden-xs">
-                            Project Completed <strong class="text-custom">90%</strong>.
+                            Project Completed <strong class="text-custom">39%</strong>.
                         </div>
                         <div>
-                            <strong>ESSARE</strong> - Copyright &copy; 2017
+                            <strong>Simple Admin</strong> - Copyright &copy; 2017
                         </div>
                     </div> <!-- end footer -->
 

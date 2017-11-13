@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  if($_SESSION["login"]!=1)
+    header("Location: index.php");
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,6 +18,8 @@
 
         <!--Morris Chart CSS -->
 		<link rel="stylesheet" href="assets/plugins/morris/morris.css">
+
+        <link rel="stylesheet" href="/maps/documentation/javascript/demos/demos.css">
 
         <!-- Bootstrap core CSS -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +43,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="">
-                        <a href="dash.html" class="logo">
+                        <a href="dash.php" class="logo">
                             <img src="assets/images/ESSARE.jpg" alt="logo" class="logo-lg" />
                             <img src="assets/images/logo_sm.png" alt="logo" class="logo-sm hidden" />
                         </a>
@@ -57,16 +65,16 @@
 
                             <!-- Top nav left menu -->
                             <ul class="nav navbar-nav hidden-sm hidden-xs top-navbar-items">
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Acerca De</a></li>
+                                <li><a href="#">Ayuda</a></li>
+                                <li><a href="#">Contacto</a></li>
                             </ul>
 
                             <!-- Top nav Right menu -->
                             <ul class="nav navbar-nav navbar-right top-navbar-items-right pull-right">
                                 <li class="hidden-xs">
                                     <form role="search" class="navbar-left app-search pull-left">
-                                         <input type="text" placeholder="Search..." class="form-control">
+                                         <input type="text" placeholder="Buscar..." class="form-control">
                                          <a href=""><i class="fa fa-search"></i></a>
                                     </form>
                                 </li>
@@ -74,11 +82,17 @@
                                 <li class="dropdown top-menu-item-xs">
                                     <a href="" class="dropdown-toggle menu-right-item profile" data-toggle="dropdown" aria-expanded="true"><img src="assets/images/users/avatar-2.jpg" alt="user-img" class="img-circle"> </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="profile.html"><i class="ti-user m-r-10"></i> Profile</a></li>
-                                        <li><a href="javascript:void(0)"><i class="ti-settings m-r-10"></i> Settings</a></li>
-                                        <li><a href="javascript:void(0)"><i class="ti-lock m-r-10"></i> Lock screen</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="index.html"><i class="ti-power-off m-r-10"></i> Logout</a></li>
+                                        <li><a href="profile.php"><i class="ti-user m-r-10"></i> Perfil</a></li>
+                                        <li><a href="timeline.php"><i class="mdi mdi-timelapse"></i> Timeline</a></li>
+                                        <li><a href="calendar.php"><i class="mdi mdi-calendar"></i> Calendar</a></li>
+                                        <li><a href="contacts.php"><i class="mdi mdi-account-multiple"></i> Contacts</a></li>
+                                        <script type="text/javascript">
+                                          function logout() {
+                                              $.get("logout.php");
+                                              return false;
+                                            }
+                                        </script>
+                                        <li><a href="index.php"  onclick="logout()"><i class="ti-power-off m-r-10"></i>Salir</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -105,28 +119,28 @@
                                     <img src="assets/images/users/avatar-2.jpg" alt="" class="thumb-md img-circle">
                                 </div>
                                 <div class="user-info">
-                                    <a href="#">Sergio Pérez</a>
-                                    <p class="text-muted m-0">Administrator</p>
+                                    <a href="profile.php">Sergio Pérez</a>
+                                    <p class="text-muted m-0">Administrador</p>
                                 </div>
                             </div>
                             <!--- End User Detail box -->
 
                             <!-- Left Menu Start -->
                             <ul class="metisMenu nav" id="side-menu">
-                                <li><a href="dash.html"><i class="ti-home"></i> Dashboard </a></li>
+                                <li><a href="dash.php"><i class="ti-home"></i> Dashboard </a></li>
 
-                                <li><a href="busqueda.html"><i class="fa fa-search" aria-hidden="true"></i> Realizar Busqueda </a></li>
+                                <li><a href="busqueda.php"><i class="fa fa-search" aria-hidden="true"></i> Realizar Busqueda </a></li>
 
-                                <li><a href="ui-elements.html"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
+                                <li><a href="page404.php"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Realizar Venta </a></li>
 
-                                <li><a href="reportes.html"><i class="fa fa-file-o" aria-hidden="true"></i> Reportes </a></li>
+                                <li><a href="reportes.php"><i class="fa fa-file-o" aria-hidden="true"></i> Reportes </a></li>
 
 								<li>
                                     <a href="javascript: void(0);" aria-expanded="true"><i class="fa fa-users"></i> Usuarios <span class="fa arrow"></span></a>
                                     <ul class="nav-second-level nav" aria-expanded="true">
-                                        <li><a href="alta_u.html">Alta de Usuario</a></li>
-                                        <li><a href="mod_u.html">Modificar Usuario</a></li>
-                                        <li><a href="eli_u.html">Eliminar Usuario</a></li>
+                                        <li><a href="alta_u.php">Alta de Usuario</a></li>
+                                        <li><a href="mod_u.php">Modificar Usuario</a></li>
+                                        <li><a href="eli_u.php">Eliminar Usuario</a></li>
                                         </li>
                                     </ul>
                                 </li>
@@ -134,10 +148,10 @@
 								<li>
                                     <a href="javascript: void(0);" aria-expanded="true"><i class="fa fa-database"></i> Inventario <span class="fa arrow"></span></a>
                                     <ul class="nav-second-level nav" aria-expanded="true">
-                                        <li><a href="alta_p.html">Alta de Producto</a></li>
-                                        <li><a href="mod_p.html">Modificar Producto</a></li>
-                                        <li><a href="eli_p.html">Eliminar Producto</a></li>
-                                        <li><a href="sur_p.html">Surtir Producto</a></li>
+                                        <li><a href="alta_p.php">Alta de Producto</a></li>
+                                        <li><a href="mod_p.php">Modificar Producto</a></li>
+                                        <li><a href="eli_p.php">Eliminar Producto</a></li>
+                                        <li><a href="sur_p.php">Surtir Producto</a></li>
                                         </li>
                                     </ul>
                                 </li>
@@ -154,33 +168,111 @@
                     <div class="container">
                         <div class="row">
 							<div class="col-sm-12">
+
+
+                                            <?php
+
+                                                    $servername = "localhost";
+                                                    $username = "root";
+                                                    $password = "14sgpp997";
+                                                    $dbname = "lindavista";
+                                                    $conn = new mysqli($servername, $username, $password, $dbname);
+
+                                                    if ($conn->connect_error) {
+                                                        die("Connection failed: " . $conn->connect_error);
+                                                    }else{
+
+                                                            $consulta_productos = "SELECT count(*) FROM productos";
+                                                            $consulta_usuarios = "SELECT count(*) FROM usuarios";
+                                                            $consulta_ventas = "SELECT count(*) FROM ventas";
+                                                            $consulta_marcas = "SELECT count(*) FROM marcas";
+                                                            //echo $consulta;
+                                                            $resultado_productos = $conn->query($consulta_productos);
+                                                            $resultado_usuarios = $conn->query($consulta_usuarios);
+                                                            $resultado_ventas = $conn->query($consulta_ventas);
+                                                            $resultado_marcas = $conn->query($consulta_marcas);
+                                                            if ($resultado_productos->num_rows>0) {
+                                                                
+                                                                $Array = array();
+                                                                while($row = $resultado_productos->fetch_assoc()) {
+                                                                     $Array[] = $row;
+                                                                 }
+
+                                                                    $cadena_productos=array_values($Array[0])[0];
+                                                                    //echo $cadena;
+                                                                    //echo "<script>window.open(\"".$cadena."\",'_self');</script>";
+
+                                                            }
+
+                                                            if ($resultado_usuarios->num_rows>0) {
+                                                                
+                                                                $Array = array();
+                                                                while($row = $resultado_usuarios->fetch_assoc()) {
+                                                                     $Array[] = $row;
+                                                                 }
+
+                                                                    $cadena_usuarios=array_values($Array[0])[0];
+                                                                    //echo $cadena;
+                                                                    //echo "<script>window.open(\"".$cadena."\",'_self');</script>";
+
+                                                            }
+
+                                                            if ($resultado_ventas->num_rows>0) {
+                                                                
+                                                                $Array = array();
+                                                                while($row = $resultado_ventas->fetch_assoc()) {
+                                                                     $Array[] = $row;
+                                                                 }
+
+                                                                    $cadena_ventas=array_values($Array[0])[0];
+                                                                    //echo $cadena;
+                                                                    //echo "<script>window.open(\"".$cadena."\",'_self');</script>";
+
+                                                            }
+                                                            if ($resultado_marcas->num_rows>0) {
+                                                                
+                                                                $Array = array();
+                                                                while($row = $resultado_marcas->fetch_assoc()) {
+                                                                     $Array[] = $row;
+                                                                 }
+
+                                                                    $cadena_marcas=array_values($Array[0])[0];
+                                                                    //echo $cadena;
+                                                                    //echo "<script>window.open(\"".$cadena."\",'_self');</script>";
+
+                                                            }                                                            
+                                                    }
+                                                $conn->close();
+                                            ?>
+
+
 								<div class="card-box widget-inline">
 									<div class="row">
 										<div class="col-lg-3 col-sm-6">
 											<div class="widget-inline-box text-center">
-												<h3 class="m-t-10"><i class="text-primary mdi mdi-access-point-network"></i> <b data-plugin="counterup">8954</b></h3>
+												<h3 class="m-t-10"><i class="text-primary mdi mdi-access-point-network"></i> <b data-plugin="counterup"><?php echo $cadena_ventas; ?></b></h3>
 												<p class="text-muted">Total de Ventas</p>
 											</div>
 										</div>
 
 										<div class="col-lg-3 col-sm-6">
 											<div class="widget-inline-box text-center">
-												<h3 class="m-t-10"><i class="text-custom mdi mdi-airplay"></i> <b data-plugin="counterup">7841</b></h3>
-												<p class="text-muted">Cantidad de Ingresos</p>
+												<h3 class="m-t-10"><i class="text-custom mdi mdi-airplay"></i> <b data-plugin="counterup"><?php echo $cadena_productos; ?></b></h3>
+												<p class="text-muted">Productos Totales</p>
 											</div>
 										</div>
 
 										<div class="col-lg-3 col-sm-6">
 											<div class="widget-inline-box text-center">
-												<h3 class="m-t-10"><i class="text-info mdi mdi-black-mesa"></i> <b data-plugin="counterup">6521</b></h3>
+												<h3 class="m-t-10"><i class="text-info mdi mdi-black-mesa"></i> <b data-plugin="counterup"><?php echo $cadena_usuarios; ?></b></h3>
 												<p class="text-muted">Total de Usuarios</p>
 											</div>
 										</div>
 
 										<div class="col-lg-3 col-sm-6">
 											<div class="widget-inline-box text-center b-0">
-												<h3 class="m-t-10"><i class="text-danger mdi mdi-cellphone-link"></i> <b data-plugin="counterup">325</b></h3>
-												<p class="text-muted">Total de Visitas</p>
+												<h3 class="m-t-10"><i class="text-danger mdi mdi-cellphone-link"></i> <b data-plugin="counterup"><?php echo $cadena_marcas; ?></b></h3>
+												<p class="text-muted">Marcas de Zapatos</p>
 											</div>
 										</div>
 
@@ -435,13 +527,15 @@
                             </div>
                         </div>
 
+                        <div id="map" style="height:500px; width:1000"></div>
+
 
                     </div>
                     <!-- end container -->
 
                     <div class="footer">
                         <div class="pull-right hidden-xs">
-                            Project Completed <strong class="text-custom">39%</strong>.
+                            Project Completed <strong class="text-custom">90%</strong>.
                         </div>
                         <div>
                             <strong>ESSARE</strong> - Copyright &copy; 2017
@@ -473,6 +567,18 @@
 
         <!-- App Js -->
         <script src="assets/js/jquery.app.js"></script>
+
+        <script>
+      function initMap() {
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWiI5HVzAoMvq89H0egAIvxTgXml1tyB0&callback=initMap" async defer></script>
 
     </body>
 </html>

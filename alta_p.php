@@ -8,7 +8,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>ESSARE - Modificar Usuario</title>
+        <title>ESSARE - Alta Productos</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -164,73 +164,111 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="m-b-20 header-title">Modificar Usuario</h4>
+                                <h4 class="m-b-20 header-title">Alta de Productos</h4>
+
+                                            <?php
+                                            $servername = "localhost";
+                                            $username = "root";
+                                            $password = "14sgpp997";
+                                            $dbname = "lindavista";
+                                            $conn = new mysqli($servername, $username, $password, $dbname);
+
+                                            if ($conn->connect_error) {
+                                                die("Connection failed: " . $conn->connect_error);
+                                            }else{
+
+                                                  if(isset($_POST['registro']))
+                                                  {
+                                                    //echo "hola";
+                                                    $codigo = $_POST["codigo"];
+                                                    $nombre = $_POST["nombre"];
+                                                    $marca = $_POST["marca"];
+                                                    $tipo = $_POST["tipo"];
+                                                    $talla = $_POST["talla"];
+
+                                                    $consulta = 'INSERT INTO productos (Codigo, Nombre, Marca, Tipo, Talla) VALUES ("'.$codigo.'","'.$nombre.'","'.$marca.'","'.$tipo.'","'.$talla.'")';
+                                                    //echo $consulta;
+                                                    $resultado = $conn->query($consulta);
+                                                   if ($resultado==true)
+                                                    {
+                                                      echo "<div class='alert alert-success alert-dismissible fade in' role='alert'>
+                                                                        <button type='button' class='close' data-dismiss='alert'
+                                                                            aria-label='Close'>
+                                                                            <span aria-hidden='true'>&times;</span>
+                                                                        </button>
+                                                                         Producto registrado correctamente.
+                                                                    </div>";
+                                                    }else{
+                                                      echo "<div class='alert alert-success alert-dismissible fade in' role='alert'>
+                                                                        <button type='button' class='close' data-dismiss='alert'
+                                                                            aria-label='Close'>
+                                                                            <span aria-hidden='true'>&times;</span>
+                                                                        </button>
+                                                                         Algo ha sucedido mal. Producto no agregado.
+                                                                    </div>";
+                                                    }
+                                                  }
+                                              }
+
+                                            $conn->close();
+                                        ?>
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form class="form-horizontal" method="POST" action="mod_u.php" role="form">
-                                            <br><br>
+                                        <form class="form-horizontal" method="POST" action="alta_p.php" role="form">
+
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label">Ingrese Clave:</label>
+                                                <label class="col-md-2 control-label">Codigo:</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" name="clave" class="form-control" placeholder="Clave de Usuario">
+                                                    <input type="text" name="codigo" class="form-control" placeholder="Codigo">
+                                                    <span class="help-block"><small>Los ultimos dos digitos deben corresponder a la talla, en caso contrario, no se podra modificar la talla</small></span>
                                                 </div>
                                             </div>
-                                            <br><br><br>
                                             <div class="form-group">
-                                              <center>
-                                                <input type="submit" class="btn btn-primary" name="btn_buscar" value="Buscar usuario"></input>
-                                              </center>
+                                                <label class="col-md-2 control-label">Nombre Producto:</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="nombre" class="form-control" placeholder="Nombre Producto">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label" for="example-email">Marca:</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="marca" class="form-control" placeholder="Marca">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label" for="example-email">Tipo:</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="tipo" class="form-control" placeholder="Tipo">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Talla:</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" name="talla">
+                                                        <option>22</option>
+                                                        <option>23</option>
+                                                        <option>24</option>
+                                                        <option>25</option>
+                                                        <option>26</option>
+                                                        <option>27</option>
+                                                        <option>28</option>
+                                                        <option>29</option>
+                                                        <option>30</option>
+                                                    </select>
+                                                </div>
                                             </div>
 
-                                            <br><br>
-                                            <?php
-                                              if(isset($_POST["clave"])){
-
-                                                    $servername = "localhost";
-                                                    $username = "root";
-                                                    $password = "14sgpp997";
-                                                    $dbname = "lindavista";
-                                                    $conn = new mysqli($servername, $username, $password, $dbname);
-
-                                                    if ($conn->connect_error) {
-                                                        die("Connection failed: " . $conn->connect_error);
-                                                    }else{
-
-                                                            $consulta = "Select Clave, Nombre, ApellidoPaterno, ApellidoMaterno, Edad, Finicio, Tipo, Biografia, Username FROM usuarios where Clave = '".$_POST["clave"]."'";
-                                                            //echo $consulta;
-                                                            $resultado = $conn->query($consulta);
-                                                            if ($resultado->num_rows>0) {
-                                                                
-
-
-                                                                $Array = array();
-                                                                while($row = $resultado->fetch_assoc()) {
-                                                                     $Array[] = $row;
-                                                                 }
-
-                                                            $cadena="mod_u_g.php?clave='".array_values($Array[0])[0]."'&nombre='".array_values($Array[0])[1]."'&apaterno='".array_values($Array[0])[2]."'&amaterno='".array_values($Array[0])[3]."'&edad='".array_values($Array[0])[4]."'&fecha='".array_values($Array[0])[5]."'&tipo='".array_values($Array[0])[6]."'&biografia='".array_values($Array[0])[7]."'&username='".array_values($Array[0])[8]."'";
-                                                                  //echo $cadena;
-                                                                  echo "<script>window.open(\"".$cadena."\",'_self');</script>";
-
-                                                            }else{
-                                                                echo "<div class='alert alert-danger alert-dismissible fade in' role='alert'>
-                                                                            <button type='button' class='close' data-dismiss='alert'
-                                                                                    aria-label='Close'>
-                                                                                <span aria-hidden='true'>&times;</span>
-                                                                            </button>
-                                                                            <strong>Error!</strong> Usuario no encontrado.
-                                                                        </div>";
-                                                            }
-                                                    }
-                                                $conn->close();
-
-                                                //echo "<script>document.location.href='mod_u_g.php';</script>";
-                                              }
-                                            ?>
-
-                                            </form>
+                                            <div class="form-group">
+                                              <center>
+                                                <br><br><br>
+                                                <input type="submit" name="registro" class="btn btn-success btn-bordered" value="Guardar Producto">
+                                              </center>
+                                            </div>
                                             
+
+
+                                        </form>
                                     </div>
 
 
